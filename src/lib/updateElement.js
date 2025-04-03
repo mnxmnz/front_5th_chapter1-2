@@ -5,7 +5,7 @@ export function updateElement(parent, newNode, oldNode, index = 0) {
   // oldNode 만 있는 경우
   if (!newNode && oldNode) {
     // oldNode 를 parent 에서 제거
-    return parent.removeChild(parent.childNode[index]);
+    return parent.removeChild(parent.childNodes[index]);
   }
 
   // newNode 만 있는 경우
