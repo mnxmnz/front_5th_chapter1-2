@@ -2,7 +2,7 @@
 const eventHandlers = new WeakMap();
 
 // 처리할 이벤트 타입 목록
-const EVENT_TYPES = ["click", "mouseover", "focus", "keydown"];
+const EVENT_TYPES = ["click", "mouseover", "focus", "keydown", "submit"];
 
 export function setupEventListeners(root) {
   // 이미 이벤트 리스너가 등록되어 있는지 확인
