@@ -9,9 +9,6 @@ export function render() {
   const Page = router.get().getTarget() ?? NotFoundPage;
   const $root = document.querySelector("#root");
 
-  // 이전 DOM 제거
-  $root.innerHTML = "";
-
   try {
     renderElement(<Page />, $root);
   } catch (error) {
