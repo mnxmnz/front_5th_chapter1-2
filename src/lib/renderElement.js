@@ -1,16 +1,25 @@
 import { setupEventListeners } from "./eventManager";
 import { createElement } from "./createElement";
 import { normalizeVNode } from "./normalizeVNode";
-// import { updateElement } from "./updateElement";
+import { updateElement } from "./updateElement";
+
+const vNodeMap = new Map();
 
 export function renderElement(vNode, container) {
-  const normalizedVNode = normalizeVNode(vNode);
-  const $el = createElement(normalizedVNode);
+  const newNode = normalizeVNode(vNode);
 
-  // 기존 내용을 지우고 새로운 내용으로 교체
-  container.innerHTML = "";
-  container.appendChild($el);
+  // 초기 렌더링
+  if (container.innerHTML === "") {
+    const element = createElement(newNode);
+    container.appendChild(element);
+    setupEventListeners(container);
 
-  // 이벤트 위임을 사용하여 최상위 컨테이너에 하나의 리스너만 등록
-  setupEventListeners(container);
+    vNodeMap.set(container, newNode);
+    return;
+  }
+
+  // diff 알고리즘을 통해 렌더링
+  const oldNode = vNodeMap.get(container);
+  vNodeMap.set(container, newNode);
+  updateElement(container, newNode, oldNode);
 }
