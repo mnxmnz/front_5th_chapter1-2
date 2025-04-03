@@ -42,11 +42,13 @@ export function createElement(vNode) {
         // className 속성을 class 속성으로 변환
         // React 에서는 className 을 사용하지만, 브라우저에서는 class 를 사용
         $el.setAttribute("class", value);
+
         // props를 처리할 때 attribute 가 "on"으로 시작하는지 확인
         // "on" 으로 시작하는 경우 이벤트 핸들러로 처리
         // 이벤트 이름은 "on" 을 제거하고 소문자로 변환
       } else if (attribute.startsWith("on")) {
         const eventName = attribute.slice(2).toLowerCase();
+
         addEvent($el, eventName, value);
       } else {
         $el.setAttribute(attribute, value);
@@ -61,5 +63,3 @@ export function createElement(vNode) {
 
   return $el;
 }
-
-// function updateAttributes($el, props) {}
